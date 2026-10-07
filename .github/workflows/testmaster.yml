@@ -18,7 +18,7 @@
       },
       "env": {
         "TESTMASTER_OFFLINE": "true",
-        "TESTMASTER_MANIFEST_SHA256": "b63aa1c88445557c9bfdd12ca836ad13659bd2265ef241671171512a3f62317e"
+        "TESTMASTER_MANIFEST_SHA256": "f3f5ec3e7f6e5187343d1db743c5df00d05ad4122286f95eb9b9f83bc9f90977"
       },
       "outputs": {
         "artifact-id": "${{ steps.upload.outputs.artifact-id }}",
@@ -45,7 +45,7 @@
           "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
           "with": {
             "repository": "quantmind-br/testmaster",
-            "ref": "705761a80a007c4ba189606e9ce804d0023374aa",
+            "ref": "c50ae7a656c92d2b8ed8b83773d071689d26e705",
             "path": ".testmaster-trusted",
             "persist-credentials": false
           }
@@ -66,7 +66,7 @@
         },
         {
           "name": "Download anonymous pinned public runtime",
-          "run": "set -euo pipefail\nmkdir -m 700 \"$TESTMASTER_RELEASE_DIR\" \"$TESTMASTER_RELEASE_DIR/images\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-1dad3fc/manifest.json' --output \"$TESTMASTER_RELEASE_DIR/manifest.json\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-1dad3fc/runtime.tar.gz' --output \"$TESTMASTER_RELEASE_DIR/runtime.tar.gz\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-1dad3fc/testmaster-runner.tar.gz.part-0000' --output \"$TESTMASTER_RELEASE_DIR/images/testmaster-runner.tar.gz.part-0000\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-1dad3fc/testmaster-runner-python.tar.gz.part-0000' --output \"$TESTMASTER_RELEASE_DIR/images/testmaster-runner-python.tar.gz.part-0000\"\nprintf '%s  %s\\n' \"$TESTMASTER_MANIFEST_SHA256\" \"$TESTMASTER_RELEASE_DIR/manifest.json\" | sha256sum --check --status"
+          "run": "set -euo pipefail\nmkdir -m 700 \"$TESTMASTER_RELEASE_DIR\" \"$TESTMASTER_RELEASE_DIR/images\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-8754db6/manifest.json' --output \"$TESTMASTER_RELEASE_DIR/manifest.json\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-8754db6/runtime.tar.gz' --output \"$TESTMASTER_RELEASE_DIR/runtime.tar.gz\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-8754db6/testmaster-runner.tar.gz.part-0000' --output \"$TESTMASTER_RELEASE_DIR/images/testmaster-runner.tar.gz.part-0000\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-8754db6/testmaster-runner-python.tar.gz.part-0000' --output \"$TESTMASTER_RELEASE_DIR/images/testmaster-runner-python.tar.gz.part-0000\"\nprintf '%s  %s\\n' \"$TESTMASTER_MANIFEST_SHA256\" \"$TESTMASTER_RELEASE_DIR/manifest.json\" | sha256sum --check --status"
         },
         {
           "name": "Install verified runtime",
@@ -86,11 +86,12 @@
         },
         {
           "id": "testmaster",
-          "uses": "quantmind-br/testmaster@705761a80a007c4ba189606e9ce804d0023374aa",
+          "uses": "quantmind-br/testmaster@c50ae7a656c92d2b8ed8b83773d071689d26e705",
           "with": {
-            "runtime-manifest": "${{ runner.temp }}/testmaster-release/manifest.json#b63aa1c88445557c9bfdd12ca836ad13659bd2265ef241671171512a3f62317e",
+            "runtime-manifest": "${{ runner.temp }}/testmaster-release/manifest.json#f3f5ec3e7f6e5187343d1db743c5df00d05ad4122286f95eb9b9f83bc9f90977",
             "all": "true",
             "environment": "ci",
+            "target-url": "http://127.0.0.1:18080/",
             "commit-sha": "${{ github.event.pull_request.head.sha || github.sha }}",
             "checkout-sha": "${{ github.sha }}",
             "quarantine-policy": "strict",
@@ -130,7 +131,7 @@
       },
       "env": {
         "TESTMASTER_OFFLINE": "true",
-        "TESTMASTER_MANIFEST_SHA256": "b63aa1c88445557c9bfdd12ca836ad13659bd2265ef241671171512a3f62317e"
+        "TESTMASTER_MANIFEST_SHA256": "f3f5ec3e7f6e5187343d1db743c5df00d05ad4122286f95eb9b9f83bc9f90977"
       },
       "steps": [
         {
@@ -142,7 +143,7 @@
           "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
           "with": {
             "repository": "quantmind-br/testmaster",
-            "ref": "705761a80a007c4ba189606e9ce804d0023374aa",
+            "ref": "c50ae7a656c92d2b8ed8b83773d071689d26e705",
             "path": ".testmaster-trusted",
             "persist-credentials": false
           }
@@ -159,13 +160,13 @@
         },
         {
           "name": "Download anonymous pinned public runtime",
-          "run": "set -euo pipefail\nmkdir -m 700 \"$TESTMASTER_RELEASE_DIR\" \"$TESTMASTER_RELEASE_DIR/images\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-1dad3fc/manifest.json' --output \"$TESTMASTER_RELEASE_DIR/manifest.json\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-1dad3fc/runtime.tar.gz' --output \"$TESTMASTER_RELEASE_DIR/runtime.tar.gz\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-1dad3fc/testmaster-runner.tar.gz.part-0000' --output \"$TESTMASTER_RELEASE_DIR/images/testmaster-runner.tar.gz.part-0000\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-1dad3fc/testmaster-runner-python.tar.gz.part-0000' --output \"$TESTMASTER_RELEASE_DIR/images/testmaster-runner-python.tar.gz.part-0000\"\nprintf '%s  %s\\n' \"$TESTMASTER_MANIFEST_SHA256\" \"$TESTMASTER_RELEASE_DIR/manifest.json\" | sha256sum --check --status"
+          "run": "set -euo pipefail\nmkdir -m 700 \"$TESTMASTER_RELEASE_DIR\" \"$TESTMASTER_RELEASE_DIR/images\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-8754db6/manifest.json' --output \"$TESTMASTER_RELEASE_DIR/manifest.json\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-8754db6/runtime.tar.gz' --output \"$TESTMASTER_RELEASE_DIR/runtime.tar.gz\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-8754db6/testmaster-runner.tar.gz.part-0000' --output \"$TESTMASTER_RELEASE_DIR/images/testmaster-runner.tar.gz.part-0000\"\ncurl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' 'https://github.com/quantmind-br/testmaster/releases/download/runtime-8754db6/testmaster-runner-python.tar.gz.part-0000' --output \"$TESTMASTER_RELEASE_DIR/images/testmaster-runner-python.tar.gz.part-0000\"\nprintf '%s  %s\\n' \"$TESTMASTER_MANIFEST_SHA256\" \"$TESTMASTER_RELEASE_DIR/manifest.json\" | sha256sum --check --status"
         },
         {
           "name": "Publish frozen sanitized envelope",
           "env": {
             "GITHUB_TOKEN": "${{ github.token }}",
-            "TESTMASTER_RUNTIME_MANIFEST": "${{ runner.temp }}/testmaster-release/manifest.json#b63aa1c88445557c9bfdd12ca836ad13659bd2265ef241671171512a3f62317e",
+            "TESTMASTER_RUNTIME_MANIFEST": "${{ runner.temp }}/testmaster-release/manifest.json#f3f5ec3e7f6e5187343d1db743c5df00d05ad4122286f95eb9b9f83bc9f90977",
             "TESTMASTER_ARTIFACT_ID": "${{ needs.execute.outputs.artifact-id }}",
             "TESTMASTER_ARTIFACT_SHA256": "${{ needs.execute.outputs.artifact-sha256 }}",
             "TESTMASTER_REPORT_HASH": "${{ needs.execute.outputs.report-hash }}",
