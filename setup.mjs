@@ -6,7 +6,7 @@ import { appendFileSync, mkdirSync } from "node:fs";
 const cli = process.env.TESTMASTER_CLI;
 const dataDir = process.env.TESTMASTER_DATA_DIR;
 const scenario = process.env.SCENARIO || "selected";
-const scenarios = ["selected", "empty", "authorized-empty", "cancel", "injection", "sha-mismatch"];
+const scenarios = ["selected", "empty", "authorized-empty", "cancel", "injection", "sha-mismatch", "publisher-readonly"];
 if (!cli || !dataDir || !scenarios.includes(scenario)) throw new Error("Invalid setup context");
 mkdirSync(dataDir, { recursive: true, mode: 0o700 });
 const command = (...args) => {
