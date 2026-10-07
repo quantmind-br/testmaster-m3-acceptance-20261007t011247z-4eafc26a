@@ -62,8 +62,11 @@ export async function runPublisher(env = process.env) {
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href)
     runPublisher().then((code) => {
         process.exitCode = code;
-    }, () => {
-        console.error("Trusted check publication failed");
+    }, (error) => {
+        // ActionInputError messages are fixed code-owned strings; anything else stays generic.
+        console.error(error instanceof ActionInputError
+            ? `Trusted check publication failed: ${error.code}: ${error.message}`
+            : "Trusted check publication failed");
         process.exitCode = 7;
     });
 //# sourceMappingURL=publish.js.map
