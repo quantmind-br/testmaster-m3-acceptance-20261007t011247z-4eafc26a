@@ -134,6 +134,16 @@ jobs:
           node-version: "24"
       - name: Free runner disk for locked runner images
         run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
+      - name: Use the containerd image store required by the image lock
+        run: |
+          docker version --format 'client={{.Client.Version}} server={{.Server.Version}}'
+          config=/etc/docker/daemon.json
+          current=$(sudo cat "$config" 2>/dev/null || echo '{}')
+          echo "$current" | jq '.features = ((.features // {}) + {"containerd-snapshotter": true})' | sudo tee "$config" > /dev/null
+          sudo systemctl restart docker
+          driver=$(docker info --format '{{json .DriverStatus}}')
+          echo "driver-status=$driver"
+          case "$driver" in *io.containerd.snapshotter.v1*) ;; *) echo "::error::containerd image store not active"; exit 1;; esac
       - name: Download pinned private runtime release
         env:
           GH_TOKEN: ${{ github.token }}
