@@ -22,7 +22,8 @@ const test = command(
   "--plan", scenario === "cancel" ? "plans/slow.json" : "plans/health.json",
 );
 const head = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
-const parent = execFileSync("git", ["rev-parse", "HEAD~1"], { encoding: "utf8" }).trim();
+// Only the SHA-mismatch control needs a second commit (the root commit has no parent).
+const parent = () => execFileSync("git", ["rev-parse", "HEAD~1"], { encoding: "utf8" }).trim();
 const outputs = {
   "project-id": init.projectId,
   "environment-id": init.environmentId,
@@ -36,7 +37,7 @@ const outputs = {
   "empty-reason": scenario === "authorized-empty" ? "Acceptance control: no tests are affected" : "",
   // A pull request assesses its head commit; the checkout is the synthetic merge containing it.
   "commit-sha": process.env.PR_HEAD_SHA || head,
-  "checkout-sha": scenario === "sha-mismatch" ? parent : head,
+  "checkout-sha": scenario === "sha-mismatch" ? parent() : head,
 };
 for (const [key, value] of Object.entries(outputs)) {
   if (/[\r\n]/.test(String(value))) throw new Error("Unsafe output");
