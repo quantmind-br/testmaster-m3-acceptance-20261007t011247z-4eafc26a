@@ -11,9 +11,9 @@ permissions: {}
 env:
   # Public trusted Action distribution commit and pinned public runtime manifest.
   ACTION_REPO: quantmind-br/testmaster
-  ACTION_SHA: c50ae7a656c92d2b8ed8b83773d071689d26e705
-  RUNTIME_TAG: runtime-8754db6
-  MANIFEST_SHA256: f3f5ec3e7f6e5187343d1db743c5df00d05ad4122286f95eb9b9f83bc9f90977
+  ACTION_SHA: fc5e7eb9af9d008af8ba2b3e04ed97fafcba7990
+  RUNTIME_TAG: runtime-4df8ba5
+  MANIFEST_SHA256: 3d79df4e6676d51816401bc5cc6edb86b5b1977473dc60f94f423e3a74c91f2d
   FIXTURE_PORT: "18080"
 jobs:
   execute:
@@ -84,7 +84,7 @@ jobs:
         run: node setup.mjs
       - name: TestMaster strict CI
         id: testmaster
-        uses: quantmind-br/testmaster@c50ae7a656c92d2b8ed8b83773d071689d26e705
+        uses: quantmind-br/testmaster@fc5e7eb9af9d008af8ba2b3e04ed97fafcba7990
         env:
           TESTMASTER_DATA_DIR: ${{ runner.temp }}/testmaster-data
           TESTMASTER_PROJECT_ID: ${{ steps.setup.outputs.project-id }}
