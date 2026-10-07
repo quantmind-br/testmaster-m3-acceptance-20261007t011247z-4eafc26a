@@ -12,7 +12,7 @@ on:
 permissions: {}
 env:
   # Trusted action/installer/publisher commit and pinned runtime manifest (recorded at freeze).
-  ACTION_SHA: b3dcb58a397a9bbfe89a36d55cd42dc51355c725
+  ACTION_SHA: 70970eadb884aefeb0b70e22fc9849a3b7900d28
   RUNTIME_TAG: runtime-a0e2222
   MANIFEST_SHA256: 9ef70844e8624b5e4425cabc8df0d067164239b3b2c746382a5e400a74cded71
   FIXTURE_PORT: "18080"
@@ -80,7 +80,7 @@ jobs:
         run: node setup.mjs
       - name: TestMaster strict CI
         id: testmaster
-        uses: quantmind-br/testmaster-m3-acceptance-20261007t011247z-4eafc26a@b3dcb58a397a9bbfe89a36d55cd42dc51355c725
+        uses: quantmind-br/testmaster-m3-acceptance-20261007t011247z-4eafc26a@70970eadb884aefeb0b70e22fc9849a3b7900d28
         env:
           TESTMASTER_DATA_DIR: ${{ runner.temp }}/testmaster-data
           TESTMASTER_PROJECT_ID: ${{ steps.setup.outputs.project-id }}
